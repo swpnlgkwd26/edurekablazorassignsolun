@@ -1,0 +1,41 @@
+﻿@inject IStoreRepository _repository
+@inject NavigationManager NavigationManager
+<tr>
+    <td>@AccountNumber</td>
+    <td>@AccountHolderName</td>
+    <td>@Balance</td>
+    <td>@TypeOfAccount</td>
+    <td>
+        <button class="btn btn-warning"
+                @onclick="onDeleteClicked">
+            Delete
+        </button>
+        <button class="btn btn-info"
+                @onclick="onEditClicked">
+            Edit
+        </button>
+    </td>
+</tr>
+
+@code {
+    [Parameter]
+    public int AccountNumber { get; set; }
+    [Parameter]
+    public string AccountHolderName { get; set; }
+    [Parameter]
+    public double Balance { get; set; }
+    [Parameter]
+    public string TypeOfAccount { get; set; }
+
+    public void onDeleteClicked()
+    {
+       
+        NavigationManager.NavigateTo("/confirmdelete/"+AccountNumber);
+         
+    }
+
+    public void onEditClicked()
+    {
+        NavigationManager.NavigateTo("/update/" + AccountNumber);
+    }
+}

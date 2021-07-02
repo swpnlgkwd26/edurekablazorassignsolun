@@ -1,0 +1,57 @@
+﻿@page "/confirmdelete/{AccountNumber}"
+
+@inject IStoreRepository _repository;
+@inject NavigationManager NavigationManager
+
+<h2>  Delete Account</h2>
+<table class="table table-bordered table-striped">
+    <tr>
+        <td> Account Number </td>
+        <td> @AccountDetails.AccountNumber </td>
+    </tr>
+    <tr>
+        <td> AccountHolder Name </td>
+        <td> @AccountDetails.AccountHolderName </td>
+    </tr>
+    <tr>
+        <td> Type Of Account </td>
+        <td> @AccountDetails.TypeOfAccount </td>
+    </tr>
+    <tr>
+        <td> Balance </td>
+        <td> @AccountDetails.Balance </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <button class="btn btn-primary" @onclick="onDeleteClicked">Confirm Delete</button>
+            <button class="btn btn-warning" @onclick="onCancelClicked">Cancel</button>
+        </td>
+    </tr>
+</table>
+
+
+@code {
+    [Parameter]
+    public string AccountNumber { get; set; }
+
+    public Account AccountDetails { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        AccountDetails = await _repository.GetAccountByNumber(Convert.ToInt32(AccountNumber));
+    }
+
+    public async Task onDeleteClicked()
+    {
+        await _repository.DeleteAccount(Convert.ToInt32(AccountNumber));
+        NavigationManager.NavigateTo("/accounts");
+
+    }
+    public void onCancelClicked()
+    {
+        NavigationManager.NavigateTo("/accounts");
+    }
+
+}

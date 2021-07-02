@@ -1,0 +1,43 @@
+﻿@page "/accounts"
+@inject IStoreRepository _repository
+@inject NavigationManager NavigationManager
+
+<h2> Account Information </h2>
+<button class="btn btn-primary"
+        @onclick="onAddClicked">
+    Add Account
+</button>
+<br/>
+<br/>
+<table class="table table-bordered table-striped">
+    <TableHeader AccountNumber="AccountNumber"
+                 AccountHolderName="AccountHolderName"
+                 Balance="Balance"
+                 TypeOfAccount="TypeOfAccount" />
+    <tbody>
+        @foreach (var account in accounts)
+        {
+            <TableRow AccountNumber="@account.AccountNumber"
+                      Balance="@account.Balance"
+                      TypeOfAccount="@account.TypeOfAccount"
+                      AccountHolderName="@account.AccountHolderName" />
+        }
+    </tbody>
+</table>
+
+@code {
+    public List<Account> accounts { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await this.GetAccounts();
+    }
+    public async Task GetAccounts()
+    {
+        accounts = await _repository.GetAccounts();
+    }
+    public void onAddClicked()
+    {
+        NavigationManager.NavigateTo("/addaccount");
+    }
+}

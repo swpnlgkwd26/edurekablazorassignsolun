@@ -2,6 +2,7 @@ using blazor_app.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,12 @@ namespace blazor_app
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<IStoreRepository, AccountDBRepository>();
+
+            services.AddDbContext<EdurekaDBContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionStrings:BankAccountConnection"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

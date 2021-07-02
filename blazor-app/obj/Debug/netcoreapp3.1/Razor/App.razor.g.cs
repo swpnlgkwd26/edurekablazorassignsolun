@@ -72,6 +72,13 @@ using blazor_app.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 10 "D:\FreeLancerAssignments\PPT Edureka\SolutionFolder\Week4AssignmentSolution\edurekablazorassignsolun\blazor-app\_Imports.razor"
+using blazor_app.Data;
+
+#line default
+#line hidden
+#nullable disable
     public partial class App : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998

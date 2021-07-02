@@ -1,0 +1,60 @@
+﻿@page "/addaccount"
+
+@inject IStoreRepository _repository;
+@inject NavigationManager NavigationManager
+
+ <h2>  Add New Account </h2>
+<EditForm Model="AccountDetails" OnValidSubmit="SaveAccount">
+    <DataAnnotationsValidator />  
+    <div class="form-group">
+        <label>CustomerId</label>
+        <ValidationMessage For="@(()=>AccountDetails.CustomerId)" />
+        <InputNumber class="form-control" @bind-Value="AccountDetails.CustomerId" />
+    </div>
+    <div class="form-group">
+        <label>AccountHolderName</label>
+        <ValidationMessage For="@(()=>AccountDetails.AccountHolderName)" />
+        <InputText class="form-control" @bind-Value="AccountDetails.AccountHolderName" />
+    </div>
+    <div class="form-group">
+        <label>Balance</label>
+        <ValidationMessage For="@(()=>AccountDetails.Balance)" />
+        <InputNumber class="form-control" @bind-Value="AccountDetails.Balance" />
+    </div>
+    <div class="form-group">
+        <label>Address</label>
+        <ValidationMessage For="@(()=>AccountDetails.Address)" />
+        <InputText class="form-control" @bind-Value="AccountDetails.Address" />
+    </div>
+    <div class="form-group">
+        <label>MobileNumber</label>
+        <ValidationMessage For="@(()=>AccountDetails.MobileNumber)" />
+        <InputText class="form-control" @bind-Value="AccountDetails.MobileNumber" />
+    </div>
+    <div class="form-group">
+        @*<label>TypeOfAccount</label>*@
+        <ValidationMessage For="@(()=>AccountDetails.TypeOfAccount)" />
+        <label>
+            TypeOfAccount
+            <InputSelect @bind-Value="AccountDetails.TypeOfAccount" class="form-control">
+                <option value="">Select Type ...</option>
+                <option value="Savings">Savings</option>
+                <option value="Current">Current</option>                
+            </InputSelect>
+        </label>
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</EditForm>
+
+
+@code {   
+
+    Account AccountDetails = new Account();
+
+    public async Task SaveAccount()
+    {
+        await _repository.AddAccount(AccountDetails);
+        NavigationManager.NavigateTo("/accounts");
+    }
+
+}

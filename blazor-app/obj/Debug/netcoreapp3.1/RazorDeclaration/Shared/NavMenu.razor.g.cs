@@ -75,6 +75,13 @@ using blazor_app.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 10 "D:\FreeLancerAssignments\PPT Edureka\SolutionFolder\Week4AssignmentSolution\edurekablazorassignsolun\blazor-app\_Imports.razor"
+using blazor_app.Data;
+
+#line default
+#line hidden
+#nullable disable
     public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -83,7 +90,7 @@ using blazor_app.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 28 "D:\FreeLancerAssignments\PPT Edureka\SolutionFolder\Week4AssignmentSolution\edurekablazorassignsolun\blazor-app\Shared\NavMenu.razor"
+#line 33 "D:\FreeLancerAssignments\PPT Edureka\SolutionFolder\Week4AssignmentSolution\edurekablazorassignsolun\blazor-app\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
